@@ -38,6 +38,11 @@ INSTALLED_APPS = [
     'portfolios',
     'community',
     'agent',
+
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'corsheaders',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,6 +52,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,6 +61,29 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+}
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=2),    # access token 2시간 유효
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),    # refresh token 7일 유효
+    'ROTATE_REFRESH_TOKENS': True,                  # refresh 시 새 refresh token도 발급
+    'BLACKLIST_AFTER_ROTATION': True,               # 이전 refresh token 무효화
+    'AUTH_HEADER_TYPES': ('Bearer',),               # Authorization: Bearer {token}
+}
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+AUTH_USER_MODEL = "accounts.User"
 
 ROOT_URLCONF = 'config.urls'
 
