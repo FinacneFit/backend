@@ -168,3 +168,4 @@ KIS_BASE_URL = os.getenv(
     "KIS_BASE_URL",
     "https://openapivts.koreainvestment.com:29443"
 )
+KIS_API_INTERVAL_SECONDS = 1.0
