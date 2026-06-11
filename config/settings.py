@@ -159,3 +159,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# KIS
+KIS_APP_KEY = os.getenv("KIS_APP_KEY")
+KIS_APP_SECRET = os.getenv("KIS_APP_SECRET")
+KIS_BASE_URL = os.getenv(
+    "KIS_BASE_URL",
+    "https://openapivts.koreainvestment.com:29443"
+)
